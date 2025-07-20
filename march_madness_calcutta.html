@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>March Madness Calcutta 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+        }
+
+        .content {
+            background: white;
+            border-radius: 0 0 10px 10px;
+            padding: 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .team-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .team-card.owned {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .team-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .team-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .team-seed {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .current-bid {
+            font-size: 24px;
+            font-weight: 700;
+            color: #28a745;
+            margin: 10px 0;
+        }
+
+        .current-owner {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .bid-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .bid-input {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+        }
+
+        .bid-btn {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .leaderboard {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .leaderboard-header {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .leaderboard-item:last-child {
+            border-bottom: none;
+        }
+
+        .participant-name {
+            font-weight: 600;
+        }
+
+        .participant-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .payout-structure {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payout-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .payout-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+        }
+
+        .tournament-bracket {
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .bracket-round {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 20px;
+        }
+
+        .bracket-game {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            min-width: 200px;
+        }
+
+        .bracket-team {
+            padding: 5px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .bracket-team:last-child {
+            border-bottom: none;
+        }
+
+        .winner {
+            background: #d4edda;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .teams-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏀 March Madness Calcutta 2025</h1>
+            <p>Bid on teams, track the tournament, win big!</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('registration')">Registration</button>
+            <button class="nav-tab" onclick="showTab('auction')">Team Auction</button>
+            <button class="nav-tab" onclick="showTab('bracket')">Tournament Bracket</button>
+            <button class="nav-tab" onclick="showTab('leaderboard')">Leaderboard</button>
+            <button class="nav-tab" onclick="showTab('payouts')">Payouts</button>
+        </div>
+
+        <div class="content">
+            <!-- Registration Tab -->
+            <div id="registration" class="tab-content active">
+                <h2>Player Registration</h2>
+                <div id="registration-form">
+                    <div class="form-group">
+                        <label for="playerName">Player Name</label>
+                        <input type="text" id="playerName" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="playerEmail">Email Address</label>
+                        <input type="email" id="playerEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="playerBudget">Starting Budget ($)</label>
+                        <input type="number" id="playerBudget" value="1000" min="100" max="10000">
+                    </div>
+                    <button class="btn" onclick="registerPlayer()">Register Player</button>
+                </div>
+
+                <div id="player-list" style="margin-top: 30px;">
+                    <h3>Registered Players</h3>
+                    <div id="players-container"></div>
+                </div>
+            </div>
+
+            <!-- Auction Tab -->
+            <div id="auction" class="tab-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-pool">$0</div>
+                        <div class="stat-label">Total Pool</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="teams-sold">0</div>
+                        <div class="stat-label">Teams Sold</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avg-bid">$0</div>
+                        <div class="stat-label">Average Bid</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="highest-bid">$0</div>
+                        <div class="stat-label">Highest Bid</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="current-bidder">Current Bidder</label>
+                    <select id="current-bidder">
+                        <option value="">Select a player</option>
+                    </select>
+                </div>
+
+                <div class="teams-grid" id="teams-container"></div>
+            </div>
+
+            <!-- Tournament Bracket Tab -->
+            <div id="bracket" class="tab-content">
+                <h2>Tournament Bracket</h2>
+                <div class="tournament-bracket" id="bracket-container">
+                    <!-- Bracket will be generated dynamically -->
+                </div>
+            </div>
+
+            <!-- Leaderboard Tab -->
+            <div id="leaderboard" class="tab-content">
+                <h2>Current Standings</h2>
+                <div class="leaderboard" id="leaderboard-container">
+                    <div class="leaderboard-header">
+                        <span>Player Rankings</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payouts Tab -->
+            <div id="payouts" class="tab-content">
+                <h2>Payout Structure</h2>
+                <div class="payout-structure">
+                    <div class="payout-item">
+                        <span>Champion</span>
+                        <span>40% of pool</span>
+                    </div>
+                    <div class="payout-item">
+                        <span>Runner-up</span>
+                        <span>20% of pool</span>
+                    </div>
+                    <div class="payout-item">
+                        <span>Final Four (each)</span>
+                        <span>10% of pool</span>
+                    </div>
+                    <div class="payout-item">
+                        <span>Elite Eight (each)</span>
+                        <span>5% of pool</span>
+                    </div>
+                    <div class="payout-item">
+                        <span>Upset Bonus Pool</span>
+                        <span>10% of pool</span>
+                    </div>
+                </div>
+
+                <h3>Current Payouts</h3>
+                <div id="current-payouts"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Application State
+        let appState = {
+            players: [],
+            teams: [],
+            bids: {},
+            tournamentResults: {},
+            currentBidder: null,
+            totalPool: 0
+        };
+
+        // NCAA Tournament Teams (2025 projected)
+        const ncaaTeams = [
+            // East Region
+            {name: "Duke", seed: 1, region: "East"},
+            {name: "Auburn", seed: 2, region: "East"},
+            {name: "Tennessee", seed: 3, region: "East"},
+            {name: "Kentucky", seed: 4, region: "East"},
+            {name: "Wisconsin", seed: 5, region: "East"},
+            {name: "Texas Tech", seed: 6, region: "East"},
+            {name: "Florida", seed: 7, region: "East"},
+            {name: "Michigan State", seed: 8, region: "East"},
+            {name: "Oklahoma", seed: 9, region: "East"},
+            {name: "Utah State", seed: 10, region: "East"},
+            {name: "VCU", seed: 11, region: "East"},
+            {name: "Richmond", seed: 12, region: "East"},
+            {name: "Furman", seed: 13, region: "East"},
+            {name: "Akron", seed: 14, region: "East"},
+            {name: "Colgate", seed: 15, region: "East"},
+            {name: "Howard", seed: 16, region: "East"},
+
+            // West Region
+            {name: "Houston", seed: 1, region: "West"},
+            {name: "Iowa State", seed: 2, region: "West"},
+            {name: "Purdue", seed: 3, region: "West"},
+            {name: "Alabama", seed: 4, region: "West"},
+            {name: "Saint Mary's", seed: 5, region: "West"},
+            {name: "Creighton", seed: 6, region: "West"},
+            {name: "Texas A&M", seed: 7, region: "West"},
+            {name: "Utah", seed: 8, region: "West"},
+            {name: "TCU", seed: 9, region: "West"},
+            {name: "Colorado", seed: 10, region: "West"},
+            {name: "NC State", seed: 11, region: "West"},
+            {name: "Drake", seed: 12, region: "West"},
+            {name: "UNC Asheville", seed: 13, region: "West"},
+            {name: "Western Kentucky", seed: 14, region: "West"},
+            {name: "Saint Peter's", seed: 15, region: "West"},
+            {name: "Texas Southern", seed: 16, region: "West"},
+
+            // South Region
+            {name: "North Carolina", seed: 1, region: "South"},
+            {name: "Marquette", seed: 2, region: "South"},
+            {name: "Illinois", seed: 3, region: "South"},
+            {name: "Kansas", seed: 4, region: "South"},
+            {name: "San Diego State", seed: 5, region: "South"},
+            {name: "BYU", seed: 6, region: "South"},
+            {name: "Indiana", seed: 7, region: "South"},
+            {name: "Miami FL", seed: 8, region: "South"},
+            {name: "Arkansas", seed: 9, region: "South"},
+            {name: "Boise State", seed: 10, region: "South"},
+            {name: "Providence", seed: 11, region: "South"},
+            {name: "Charleston", seed: 12, region: "South"},
+            {name: "Louisiana", seed: 13, region: "South"},
+            {name: "Kennesaw State", seed: 14, region: "South"},
+            {name: "Princeton", seed: 15, region: "South"},
+            {name: "Texas A&M-CC", seed: 16, region: "South"},
+
+            // Midwest Region
+            {name: "UConn", seed: 1, region: "Midwest"},
+            {name: "Arizona", seed: 2, region: "Midwest"},
+            {name: "Baylor", seed: 3, region: "Midwest"},
+            {name: "Gonzaga", seed: 4, region: "Midwest"},
+            {name: "Northwestern", seed: 5, region: "Midwest"},
+            {name: "Maryland", seed: 6, region: "Midwest"},
+            {name: "Missouri", seed: 7, region: "Midwest"},
+            {name: "FAU", seed: 8, region: "Midwest"},
+            {name: "Memphis", seed: 9, region: "Midwest"},
+            {name: "Penn State", seed: 10, region: "Midwest"},
+            {name: "Arizona State", seed: 11, region: "Midwest"},
+            {name: "Grand Canyon", seed: 12, region: "Midwest"},
+            {name: "Iona", seed: 13, region: "Midwest"},
+            {name: "Oakland", seed: 14, region: "Midwest"},
+            {name: "Long Beach State", seed: 15, region: "Midwest"},
+            {name: "Holy Cross", seed: 16, region: "Midwest"}
+        ];
+
+        // Initialize the application
+        function initApp() {
+            appState.teams = ncaaTeams.map(team => ({
+                ...team,
+                currentBid: 0,
+                owner: null,
+                eliminated: false
+            }));
+
+            loadFromStorage();
+            renderTeams();
+            updateStats();
+            updatePlayerDropdown();
+        }
+
+        // Tab Navigation
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            // Update content based on tab
+            if (tabName === 'leaderboard') {
+                renderLeaderboard();
+            } else if (tabName === 'payouts') {
+                renderPayouts();
+            } else if (tabName === 'bracket') {
+                renderBracket();
+            }
+        }
+
+        // Player Registration
+        function registerPlayer() {
+            const name = document.getElementById('playerName').value.trim();
+            const email = document.getElementById('playerEmail').value.trim();
+            const budget = parseInt(document.getElementById('playerBudget').value);
+
+            if (!name || !email || !budget) {
+                showAlert('Please fill in all fields', 'error');
+                return;
+            }
+
+            if (appState.players.find(p => p.email === email)) {
+                showAlert('Player with this email already registered', 'error');
+                return;
+            }
+
+            const player = {
+                id: Date.now(),
+                name,
+                email,
+                budget,
+                spent: 0,
+                teams: [],
+                winnings: 0
+            };
+
+            appState.players.push(player);
+            saveToStorage();
+            renderPlayers();
+            updatePlayerDropdown();
+
+            // Clear form
+            document.getElementById('playerName').value = '';
+            document.getElementById('playerEmail').value = '';
+            document.getElementById('playerBudget').value = '1000';
+
+            showAlert(`${name} registered successfully!`, 'success');
+        }
+
+        // Render registered players
+        function renderPlayers() {
+            const container = document.getElementById('players-container');
+            if (appState.players.length === 0) {
+                container.innerHTML = '<p>No players registered yet.</p>';
+                return;
+            }
+
+            container.innerHTML = appState.players.map(player => `
+                <div class="leaderboard-item">
+                    <div class="participant-name">${player.name}</div>
+                    <div class="participant-stats">
+                        <span>Budget: $${player.budget}</span>
+                        <span>Spent: $${player.spent}</span>
+                        <span>Teams: ${player.teams.length}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update player dropdown
+        function updatePlayerDropdown() {
+            const select = document.getElementById('current-bidder');
+            select.innerHTML = '<option value="">Select a player</option>' +
+                appState.players.map(player => 
+                    `<option value="${player.id}">${player.name} ($${player.budget - player.spent} remaining)</option>`
+                ).join('');
+        }
+
+        // Render teams for auction
+        function renderTeams() {
+            const container = document.getElementById('teams-container');
+            const groupedTeams = appState.teams.reduce((acc, team) => {
+                if (!acc[team.region]) acc[team.region] = [];
+                acc[team.region].push(team);
+                return acc;
+            }, {});
+
+            let html = '';
+            Object.keys(groupedTeams).forEach(region => {
+                html += `<h3>${region} Region</h3>`;
+                html += groupedTeams[region].sort((a, b) => a.seed - b.seed).map(team => `
+                    <div class="team-card ${team.owner ? 'owned' : ''}">
+                        <div class="team-header">
+                            <div class="team-name">${team.name}</div>
+                            <div class="team-seed">${team.seed}</div>
+                        </div>
+                        <div class="current-bid">$${team.currentBid}</div>
+                        <div class="current-owner">
+                            ${team.owner ? `Owned by: ${team.owner}` : 'Available'}
+                        </div>
+                        <div class="bid-section">
+                            <input type="number" class="bid-input" id="bid-${team.name}" 
+                                   placeholder="Enter bid" min="${team.currentBid + 1}">
+                            <button class="btn bid-btn" onclick="placeBid('${team.name}')">
+                                Bid
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Place a bid on a team
+        function placeBid(teamName) {
+            const bidderId = document.getElementById('current-bidder').value;
+            const bidAmount = parseInt(document.getElementById(`bid-${teamName}`).value);
+
+            if (!bidderId) {
+                showAlert('Please select a bidder', 'error');
+                return;
+            }
+
+            if (!bidAmount || bidAmount <= 0) {
+                showAlert('Please enter a valid bid amount', 'error');
+                return;
+            }
+
+            const bidder = appState.players.find(p => p.id == bidderId);
+            const team = appState.teams.find(t => t.name === teamName);
+
+            if (bidAmount <= team.currentBid) {
+                showAlert(`Bid must be higher than current bid of $${team.currentBid}`, 'error');
+                return;
+            }
+
+            if (bidAmount > (bidder.budget - bidder.spent)) {
+                showAlert('Insufficient budget for this bid', 'error');
+                return;
+            }
+
+            // Update previous owner's spent amount
+            if (team.owner) {
+                const previousOwner = appState.players.find(p => p.name === team.owner);
+                if (previousOwner) {
+                    previousOwner.spent -= team.currentBid;
+                    previousOwner.teams = previousOwner.teams.filter(t => t !== teamName);
+                }
+            }
+
+            // Update team and new owner
+            team.currentBid = bidAmount;
+            team.owner = bidder.name;
+            bidder.spent += bidAmount;
+            if (!bidder.teams.includes(teamName)) {
+                bidder.teams.push(teamName);
+            }
+
+            // Clear bid input
+            document.getElementById(`bid-${teamName}`).value = '';
+
+            saveToStorage();
+            renderTeams();
+            updateStats();
+            updatePlayerDropdown();
+
+            showAlert(`${bidder.name} successfully bid $${bidAmount} on ${teamName}!`, 'success');
+        }
+
+        // Update statistics
+        function updateStats() {
+            const totalPool = appState.teams.reduce((sum, team) => sum + team.currentBid, 0);
+            const teamsSold = appState.teams.filter(team => team.owner).length;
+            const avgBid = teamsSold > 0 ? Math.round(totalPool / teamsSold) : 0;
+            const highestBid = Math.max(...appState.teams.map(team => team.currentBid));
+
+            document.getElementById('total-pool').textContent = `$${totalPool.toLocaleString()}`;
+            document.getElementById('teams-sold').textContent = teamsSold;
+            document.getElementById('avg-bid').textContent = `$${avgBid}`;
+            document.getElementById('highest-bid').textContent = `$${highestBid}`;
+
+            appState.totalPool = totalPool;
+        }
+
+        // Render leaderboard
+        function renderLeaderboard() {
+            const container = document.getElementById('leaderboard-container');
+            const sortedPlayers = [...appState.players].sort((a, b) => 
+                (b.winnings - b.spent) - (a.winnings - a.spent)
+            );
+
+            let html = '<div class="leaderboard-header"><span>Player Rankings</span></div>';
+
+            sortedPlayers.forEach((player, index) => {
+                const netWinnings = player.winnings - player.spent;
+                html += `
+                    <div class="leaderboard-item">
+                        <div>
+                            <div class="participant-name">#${index + 1} ${player.name}</div>
+                            <div style="font-size: 12px; color: #666;">
+                                Teams: ${player.teams.join(', ') || 'None'}
+                            </div>
+                        </div>
+                        <div class="participant-stats">
+                            <span>Spent: $${player.spent}</span>
+                            <span>Won: $${player.winnings}</span>
+                            <span style="font-weight: 600; color: ${netWinnings >= 0 ? '#28a745' : '#dc3545'}">
+                                Net: ${netWinnings >= 0 ? '+' : ''}$${netWinnings}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Render tournament bracket
+        function renderBracket() {
+            const container = document.getElementById('bracket-container');
+            const regions = ['East', 'West', 'South', 'Midwest'];
+
+            let html = '<div style="display: flex; gap: 20px; overflow-x: auto;">';
+
+            regions.forEach(region => {
+                const regionTeams = appState.teams.filter(t => t.region === region)
+                    .sort((a, b) => a.seed - b.seed);
+
+                html += `
+                    <div class="bracket-round">
+                        <h3>${region} Region</h3>
+                        ${regionTeams.map(team => `
+                            <div class="bracket-game ${team.eliminated ? 'eliminated' : ''}">
+                                <div class="bracket-team ${team.eliminated ? '' : 'winner'}">
+                                    (${team.seed}) ${team.name}
+                                    ${team.owner ? `<br><small>Owner: ${team.owner}</small>` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Render current payouts
+        function renderPayouts() {
+            const container = document.getElementById('current-payouts');
+            const totalPool = appState.totalPool;
+
+            if (totalPool === 0) {
+                container.innerHTML = '<p>No bids placed yet.</p>';
+                return;
+            }
+
+            const payouts = {
+                'Champion (40%)': Math.round(totalPool * 0.4),
+                'Runner-up (20%)': Math.round(totalPool * 0.2),
+                'Final Four - each (10%)': Math.round(totalPool * 0.1),
+                'Elite Eight - each (5%)': Math.round(totalPool * 0.05),
+                'Upset Bonus Pool (10%)': Math.round(totalPool * 0.1)
+            };
+
+            let html = '<div class="payout-structure">';
+            Object.entries(payouts).forEach(([category, amount]) => {
+                html += `
+                    <div class="payout-item">
+                        <span>${category}</span>
+                        <span>$${amount.toLocaleString()}</span>
+                    </div>
+                `;
+            });
+            html += '</div>';
+
+            container.innerHTML = html;
+        }
+
+        // Show alert messages
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+
+            const content = document.querySelector('.content');
+            content.insertBefore(alertDiv, content.firstChild);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Local Storage Functions
+        function saveToStorage() {
+            localStorage.setItem('calcuttaState', JSON.stringify(appState));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('calcuttaState');
+            if (saved) {
+                const savedState = JSON.parse(saved);
+                appState.players = savedState.players || [];
+                if (savedState.teams && savedState.teams.length > 0) {
+                    appState.teams = savedState.teams;
+                }
+                appState.bids = savedState.bids || {};
+                appState.tournamentResults = savedState.tournamentResults || {};
+                renderPlayers();
+            }
+        }
+
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
