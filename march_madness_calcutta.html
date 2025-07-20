@@ -450,11 +450,11 @@
                 <div class="payout-structure">
                     <div class="payout-item">
                         <span>Champion</span>
-                        <span>19% of pool</span>
+                        <span>19.00% of pool</span>
                     </div>
                     <div class="payout-item">
                         <span>Runner-up</span>
-                        <span>12% of pool</span>
+                        <span>12.00% of pool</span>
                     </div>
                     <div class="payout-item">
                         <span>Final Four (each)</span>
@@ -462,7 +462,7 @@
                     </div>
                     <div class="payout-item">
                         <span>Elite Eight (each)</span>
-                        <span>4% of pool</span>
+                        <span>4.00% of pool</span>
                     </div>
                     <div class="payout-item">
                         <span>Sweet 16 (each)</span>
@@ -473,8 +473,16 @@
                         <span>1.00% of pool</span>
                     </div>
                     <div class="payout-item">
-                        <span>Upset Bonus Pool</span>
-                        <span>1.5% of pool</span>
+                        <span>Biggest Upset Bonus</span>
+                        <span>1.50% of pool</span>
+                    </div>
+                    <div class="payout-item">
+                        <span>Biggest Beatdown Bonus</span>
+                        <span>1.50% of pool</span>
+                    </div>
+                    <div class="payout-item">
+                        <span>Small Dog Fight Bonus</span>
+                        <span>1.50% of pool</span>
                     </div>
                 </div>
 
@@ -858,13 +866,15 @@
             }
 
             const payouts = {
-                'Champion (19%)': Math.round(totalPool * 0.19),
-                'Runner-up (12%)': Math.round(totalPool * 0.12),
+                'Champion (19.00%)': Math.round(totalPool * 0.19),
+                'Runner-up (12.00%)': Math.round(totalPool * 0.12),
                 'Final Four - each (7.25%)': Math.round(totalPool * 0.0725),
-                'Elite Eight - each (4%)': Math.round(totalPool * 0.04),
+                'Elite Eight - each (4.00%)': Math.round(totalPool * 0.04),
                 'Sweet 16 - each (2.25%)': Math.round(totalPool * 0.025),
-                'Round of 32 - each (1%)':Math.round(totalPool * 0.01),
-                'Upset Bonus Pool (1.5%)': Math.round(totalPool * 0.015)
+                'Round of 32 - each (1.00%)':Math.round(totalPool * 0.01),
+                'Biggest Upset Bonus (1.50%)': Math.round(totalPool * 0.015),
+                'Biggest Beatdown Bonus (1.50%)': Math.round(totalPool * 0.015),
+                'Small Dog Fight Bonus (1.50%)': Math.round(totalPool * 0.015)
             };
 
             let html = '<div class="payout-structure">';
